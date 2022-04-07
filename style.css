@@ -1,0 +1,100 @@
+*,*::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    background-color: gray;
+}
+
+.titulo{
+    text-align: center;
+    font-weight: 300;
+    margin: 20px 0;
+    font-size: 40px;
+}
+
+.contenedor-galeria{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.caja-galeria{
+    width: 28%;
+    height: 250px;
+    margin-bottom: 30px;
+    position: relative; /*permite que los elementos hijos funcionen con base a su posicion relativa tomando a caja-galeria como padre*/
+/*  margin: auto;   aqui debe ir el margin auto, no en la img para centrar y que la img dentro se adapte dentro de caja-galeria  
+                        quito el margin auto para agregar todas las demas imagenes y todas se adapten a las medidas de caja-galeria */
+    cursor: pointer;    /*para que aparesca la manita*/
+    overflow: hidden;    /*escondera todo lo que salga fuera de la caja-galeria*/
+}
+
+.caja-galeria img{
+    display: block; /*con display block me centra la imagen*/
+    width: 100%;    /*el width sera el 100% porque lo tomara de su padre  caja-galeria*/
+    height: 100%;   /*el height sera el 100% porque lo tomara de su padre  caja-galeria*/
+    object-fit: cover;  /*cover es para que no se deforme mucho al cambiar de su tamano original*/
+    /* margin: auto;       le quito el margin auto para que ahora se adapten tambien todas las demas imagenes a la caja-galeria*/
+
+}
+
+.caja-galeria:hover .caja-hover{
+
+    /* transform: translate(100%); */
+    /*transform: scale(1);    /*la imagen transparente cubrira toda la imagen porque scale esta en 1 */
+    transform: translate(0);
+}
+
+
+.caja-hover{
+    width: 100%;
+    height: 100%;
+    position: absolute;     /**/
+    top: 0;             /*la caja transparente estara en el top */
+    left: 0;
+    background:#2b799193;       /*OJO, con color rgba no funciona no se porque*/
+    color: white;
+    font-size: 25px;
+    display: flex;              /*USO FLEXBOX* para justificar y alinear el texto  */
+    justify-content: center;
+    align-items: center;
+    transition: transform .3s;  /*transition modificara a la propiedad transform en un tiempo de 3 segundos*/
+    /* transform: scale(0);        /*en reposo no tendra imagen transparente porque esta en scale(0)*/
+    transform: translate(100%, 100%);    /*la cubierta transparente se movera en X y en Y (en reposo esta en x=100% y=100%) 
+                                            OJO si quisieramos hacer lo contario solo debemos invertir los valores de cuando esta en reposo o sea en 
+                                            caja-hover serian translate(0%,0%) y en en hover el 1*/
+
+
+}
+
+
+
+
+
+
+@media screen and (max-width:900px) {       /*cuando llegue a menos de 900px la caja galeria que contiene las imagenes aumentara a 45% para que no
+                                    se rompa y ahora en vez de 28% sera de 45% y en vez de verse 3 arriba y 3 abajo se veran 2 2 2 imagenes en vertical*/
+    .caja-galeria{  
+        width: 45%;
+    }
+
+    .caja-hover{                            /*tambian cambiara el tamanio del texto a mas pequenio*/
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:500px){
+    .caja-galeria{
+        width: 90%;
+    }
+
+    .caja-hover{
+        font-size: 18px;
+    }
+
+    
+}
